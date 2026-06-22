@@ -1,0 +1,16 @@
+{
+  "name": "zerotier-panel",
+  "version": "1.0.0",
+  "description": "ZeroTier Management Panel Backend",
+  "license": "MIT",
+  "author": "yinheng1989",
+  "repository": "https://github.com/yinheng1989/zerotier-panel",
+  "keywords": ["zerotier", "panel", "vpn", "sdn"],
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.0"
+  }
+}

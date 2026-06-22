@@ -1,0 +1,35 @@
+# ========================================
+# ZeroTier Panel — 开发/测试环境 (单容器)
+# ========================================
+# 启动:   docker compose up -d
+# 停止:   docker compose down
+# 日志:   docker compose logs -f
+# 访问:   http://localhost:3000
+# ========================================
+
+services:
+  # ============================================
+  # ZeroTier 面板 (内置 ZeroTier One 守护进程)
+  # ============================================
+  panel:
+    image: zerotier-panel:dev
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: zt-panel
+    network_mode: host
+    cap_add:
+      - NET_ADMIN
+      - SYS_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    volumes:
+      - zt-data:/var/lib/zerotier-one
+    environment:
+      - PANEL_PORT=3000
+      # 可选: 容器启动时自动加入的网络 (空格分隔)
+      # - ZEROTIER_JOIN_NETWORKS=your_network_id_here
+    restart: unless-stopped
+
+volumes:
+  zt-data:

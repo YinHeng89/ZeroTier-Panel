@@ -1,0 +1,38 @@
+# ========================================
+# ZeroTier Panel — 生产部署 (单容器)
+# ========================================
+# 启动: docker compose -f docker-compose.prod.yml up -d
+# 停止: docker compose -f docker-compose.prod.yml down
+# 更新: docker compose -f docker-compose.prod.yml pull
+#        docker compose -f docker-compose.prod.yml up -d
+# 访问: http://<设备IP>:3000
+# ========================================
+
+services:
+  # ============================================
+  # ZeroTier 面板 (内置 ZeroTier One 守护进程)
+  # ============================================
+  panel:
+    image: yinheng1989/zerotier-panel:latest
+    container_name: zt-panel
+    network_mode: host
+    cap_add:
+      - NET_ADMIN
+      - SYS_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    volumes:
+      - zt-data:/var/lib/zerotier-one
+    environment:
+      - PANEL_PORT=3000
+      # 可选: 容器启动时自动加入的网络
+      # - ZEROTIER_JOIN_NETWORKS=your_network_id_here
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  zt-data:

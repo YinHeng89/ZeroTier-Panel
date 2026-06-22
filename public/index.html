@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZeroTier Panel</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236366f1' stroke-width='2'><circle cx='12' cy='12' r='10'/><path d='M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z'/></svg>">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          <line x1="2" y1="12" x2="22" y2="12"/>
+        </svg>
+        <span>ZeroTier Panel</span>
+      </div>
+      <button class="sidebar-toggle" id="sidebarToggle" title="Toggle Sidebar">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#status" class="nav-item active" data-page="status">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="7" height="7" rx="1"/>
+          <rect x="14" y="3" width="7" height="7" rx="1"/>
+          <rect x="3" y="14" width="7" height="7" rx="1"/>
+          <rect x="14" y="14" width="7" height="7" rx="1"/>
+        </svg>
+        <span>系统状态</span>
+      </a>
+      <a href="#networks" class="nav-item" data-page="networks">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12.55a11 11 0 0 1 14.08 0"/>
+          <path d="M1.42 9a16 16 0 0 1 21.16 0"/>
+          <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+          <circle cx="12" cy="20" r="1"/>
+        </svg>
+        <span>网络管理</span>
+      </a>
+      <a href="#peers" class="nav-item" data-page="peers">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+        <span>节点信息</span>
+      </a>
+      <a href="#config" class="nav-item" data-page="config">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+        </svg>
+        <span>配置管理</span>
+      </a>
+      <a href="#service" class="nav-item" data-page="service">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+          <path d="M8 21h8"/>
+          <path d="M12 17v4"/>
+        </svg>
+        <span>服务控制</span>
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="node-info" id="sidebarNodeInfo">
+        <span class="label">Node ID</span>
+        <span class="value" id="sidebarNodeId">--</span>
+      </div>
+    </div>
+    <div class="sidebar-external">
+      <a href="https://my.zerotier.com" target="_blank" rel="noopener" class="external-link">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+          <polyline points="15 3 21 3 21 9"/>
+          <line x1="10" y1="14" x2="21" y2="3"/>
+        </svg>
+        <span>ZeroTier Central</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Top Bar -->
+    <header class="topbar">
+      <button class="menu-btn" id="menuBtn">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+      <h1 class="page-title" id="pageTitle">系统状态</h1>
+      <div class="topbar-status">
+        <span class="status-dot" id="connectionDot"></span>
+        <span id="connectionText">检测中...</span>
+      </div>
+    </header>
+
+    <!-- Page Container -->
+    <div class="page-container">
+
+      <!-- Status Page -->
+      <section class="page active" id="page-status">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon online">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+              </svg>
+            </div>
+            <div class="stat-info">
+              <span class="stat-label">服务状态</span>
+              <span class="stat-value" id="statOnline">--</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon address">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="4" width="20" height="16" rx="2"/>
+                <path d="M6 8h.01M10 8h.01"/>
+              </svg>
+            </div>
+            <div class="stat-info">
+              <span class="stat-label">节点地址</span>
+              <span class="stat-value mono" id="statAddress">--</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon version">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                <path d="M2 17l10 5 10-5"/>
+                <path d="M2 12l10 5 10-5"/>
+              </svg>
+            </div>
+            <div class="stat-info">
+              <span class="stat-label">版本</span>
+              <span class="stat-value" id="statVersion">--</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon network">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12.55a11 11 0 0 1 14.08 0"/>
+                <path d="M1.42 9a16 16 0 0 1 21.16 0"/>
+                <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+                <circle cx="12" cy="20" r="1"/>
+              </svg>
+            </div>
+            <div class="stat-info">
+              <span class="stat-label">已加入网络</span>
+              <span class="stat-value" id="statNetworkCount">--</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>详细信息</h3>
+            <button class="btn btn-sm btn-ghost" onclick="StatusPage.refresh()">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="23 4 23 10 17 10"/>
+                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+              </svg>
+              刷新
+            </button>
+          </div>
+          <div class="card-body">
+            <table class="info-table">
+              <tbody id="statusDetails">
+                <tr><td class="label">加载中...</td><td>--</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Networks Page -->
+      <section class="page" id="page-networks">
+        <div class="card">
+          <div class="card-header">
+            <h3>加入网络</h3>
+          </div>
+          <div class="card-body">
+            <div class="join-form">
+              <input type="text" id="networkIdInput" class="input" placeholder="输入 Network ID (16位)" maxlength="16">
+              <button class="btn btn-primary" id="joinBtn" onclick="NetworksPage.join()">加入</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>已加入网络</h3>
+            <button class="btn btn-sm btn-ghost" onclick="NetworksPage.refresh()">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="23 4 23 10 17 10"/>
+                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+              </svg>
+              刷新
+            </button>
+          </div>
+          <div class="card-body">
+            <div id="networksList" class="network-list">
+              <div class="empty-state">加载中...</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Peers Page -->
+      <section class="page" id="page-peers">
+        <div class="card">
+          <div class="card-header">
+            <h3>已连接节点 (Peers)</h3>
+            <button class="btn btn-sm btn-ghost" onclick="PeersPage.refresh()">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="23 4 23 10 17 10"/>
+                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+              </svg>
+              刷新
+            </button>
+          </div>
+          <div class="card-body">
+            <div class="config-hint" style="margin-bottom:12px">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="16" x2="12" y2="12"/>
+                <line x1="12" y1="8" x2="12.01" y2="8"/>
+              </svg>
+              <span>Planet = 根服务器 &nbsp;|&nbsp; Moon = 自建中继 &nbsp;|&nbsp; Leaf = 普通设备 &nbsp;|&nbsp; 直连 = P2P 打洞成功 &nbsp;|&nbsp; 中继 = 走中转转发</span>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>地址</th>
+                    <th>版本</th>
+                    <th>延迟</th>
+                    <th>角色</th>
+                    <th>连接类型</th>
+                  </tr>
+                </thead>
+                <tbody id="peersTableBody">
+                  <tr><td colspan="5" class="empty-state">加载中...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Config Page -->
+      <section class="page" id="page-config">
+        <div class="card">
+          <div class="card-header">
+            <h3>local.conf 配置</h3>
+            <div class="card-actions">
+              <button class="btn btn-sm btn-ghost" onclick="ConfigPage.refresh()">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="23 4 23 10 17 10"/>
+                  <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+                </svg>
+                刷新
+              </button>
+              <button class="btn btn-sm btn-primary" onclick="ConfigPage.save()">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+                  <polyline points="17 21 17 13 7 13 7 21"/>
+                  <polyline points="7 3 7 8 15 8"/>
+                </svg>
+                保存
+              </button>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="config-hint">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="16" x2="12" y2="12"/>
+                <line x1="12" y1="8" x2="12.01" y2="8"/>
+              </svg>
+              配置文件为 JSON 格式，可配置 moon/orbit 节点、虚拟网络路径等。修改后需重启 ZeroTier 生效。
+            </div>
+            <textarea id="configEditor" class="code-editor" spellcheck="false" placeholder="{}"></textarea>
+          </div>
+        </div>
+      </section>
+
+      <!-- Service Control Page -->
+      <section class="page" id="page-service">
+        <div class="card">
+          <div class="card-header">
+            <h3>服务状态</h3>
+            <div class="card-actions">
+              <button class="btn btn-sm btn-ghost" onclick="ServicePage.refresh()">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="23 4 23 10 17 10"/>
+                  <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+                </svg>
+                刷新
+              </button>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="service-status-grid">
+              <div class="status-item">
+                <span class="status-label">ZeroTier 服务</span>
+                <span class="status-value" id="svcRunning">--</span>
+              </div>
+              <div class="status-item">
+                <span class="status-label">开机自启</span>
+                <span class="status-value" id="svcEnabled">--</span>
+              </div>
+              <div class="status-item">
+                <span class="status-label">Host Agent</span>
+                <span class="status-value" id="svcAgent">--</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>容器管理</h3>
+          </div>
+          <div class="card-body">
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <p style="margin:0;font-size:13px;color:var(--text-muted)">面板运行在容器内，无法直接控制宿主机 Docker 进程。请在宿主机终端执行：</p>
+              <div style="display:flex;align-items:center;gap:12px">
+                <span style="font-weight:600;min-width:56px">启动服务</span>
+                <code style="background:var(--bg-secondary);padding:3px 10px;border-radius:4px;font-size:13px;flex:1">docker compose start zerotier</code>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px">
+                <span style="font-weight:600;min-width:56px">停止服务</span>
+                <code style="background:var(--bg-secondary);padding:3px 10px;border-radius:4px;font-size:13px;flex:1">docker compose stop zerotier</code>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px">
+                <span style="font-weight:600;min-width:56px">重启服务</span>
+                <code style="background:var(--bg-secondary);padding:3px 10px;border-radius:4px;font-size:13px;flex:1">docker compose restart zerotier</code>
+              </div>
+              <p style="margin:0;font-size:13px;color:var(--text-muted)">开机自启已由 restart 策略自动管理</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Toast -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="/js/app.js"></script>
+  <script src="/js/status.js"></script>
+  <script src="/js/networks.js"></script>
+  <script src="/js/peers.js"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/service.js"></script>
+</body>
+</html>
