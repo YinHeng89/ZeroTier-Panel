@@ -47,7 +47,7 @@ const StatusPage = {
     ];
 
     if (status.startupTime) {
-      rows.push(['服务启动时间', new Date(status.startupTime).toLocaleString('zh-CN')]);
+      rows.push(['服务启动时间', new Date(parseInt(status.startupTime, 10)).toLocaleString('zh-CN')]);
     }
     if (status.uptime) {
       rows.push(['已运行时长', formatUptime(status.uptime)]);

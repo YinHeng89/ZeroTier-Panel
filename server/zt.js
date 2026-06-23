@@ -10,10 +10,25 @@ const ZT_HOST = process.env.ZT_API_HOST || '127.0.0.1';
 const ZT_PORT = process.env.ZT_API_PORT || '9993';
 const ZT_DATA_DIR = process.env.ZT_DATA_DIR || '/var/lib/zerotier-one';
 
+// 缓存 authtoken，避免重复文件读取
+let authTokenCache = null;
+let authTokenCacheTime = 0;
+const CACHE_TTL = 60000; // 1分钟缓存
+
 function getAuthToken() {
   try {
-    return fs.readFileSync(path.join(ZT_DATA_DIR, 'authtoken.secret'), 'utf8').trim();
+    // 检查缓存是否还有效
+    if (authTokenCache && (Date.now() - authTokenCacheTime < CACHE_TTL)) {
+      return authTokenCache;
+    }
+
+    const token = fs.readFileSync(path.join(ZT_DATA_DIR, 'authtoken.secret'), 'utf8').trim();
+    authTokenCache = token;
+    authTokenCacheTime = Date.now();
+    return token;
   } catch {
+    authTokenCache = null;
+    authTokenCacheTime = 0;
     return null;
   }
 }
