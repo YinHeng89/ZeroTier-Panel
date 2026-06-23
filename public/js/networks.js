@@ -102,7 +102,21 @@ const NetworksPage = {
   },
 
   async leave(networkId) {
-    if (!confirm(`确定要离开网络 ${networkId} 吗？`)) return;
+    // 第一次确认
+    if (!confirm(`确定要离开网络 ${networkId} 吗？\n\n此操作将断开该网络的连接。`)) {
+      return;
+    }
+
+    // 第二次确认（更强烈的警告）
+    const userConfirmed = prompt(
+      `请输入 Network ID 的前 8 位 "${networkId.substring(0, 8)}" 以确认离开网络：`,
+      ''
+    );
+    
+    if (userConfirmed !== networkId.substring(0, 8)) {
+      Toast.error('输入不匹配，操作已取消');
+      return;
+    }
 
     try {
       await API.del(`/networks/${networkId}`);
