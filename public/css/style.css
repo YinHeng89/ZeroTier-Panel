@@ -345,6 +345,9 @@ body {
 .btn:hover { background: var(--bg-hover); border-color: var(--border-light); }
 
 .btn-sm { padding: 5px 10px; font-size: 12px; }
+.btn-xs { padding: 2px 8px; font-size: 11px; line-height: 1.6; }
+
+.btn-outline { background: transparent; }
 
 .btn-ghost { background: transparent; border-color: transparent; color: var(--text-secondary); }
 .btn-ghost:hover { background: var(--bg-hover); color: var(--text-primary); border-color: transparent; }
@@ -624,6 +627,13 @@ body {
   from { opacity: 0; transform: translateX(40px); }
   to { opacity: 1; transform: translateX(0); }
 }
+
+/* Spinner animation */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.spin-icon { animation: spin 1s linear infinite; }
 
 /* ==================== Scrollbar ==================== */
 ::-webkit-scrollbar { width: 6px; }

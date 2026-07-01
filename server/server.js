@@ -35,11 +35,12 @@ app.options('*', (_req, res) => res.sendStatus(204));
 
 // ---- 路由 ----
 const zt = require('./zt');
-app.use('/api/status',    require('./routes/status')(zt));
-app.use('/api/networks',  require('./routes/networks')(zt));
-app.use('/api/peers',     require('./routes/peers')(zt));
-app.use('/api/config',    require('./routes/config')(zt));
-app.use('/api/service',   require('./routes/service')(zt));
+app.use('/api/status',       require('./routes/status')(zt));
+app.use('/api/networks',     require('./routes/networks')(zt));
+app.use('/api/peers',        require('./routes/peers')(zt));
+app.use('/api/config',       require('./routes/config')(zt));
+app.use('/api/service',      require('./routes/service')(zt));
+app.use('/api/check-update', require('./routes/check-update')(zt));
 
 // ---- 静态文件 ----
 app.use(express.static(STATIC_DIR));
